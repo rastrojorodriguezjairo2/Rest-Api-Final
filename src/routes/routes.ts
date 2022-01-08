@@ -90,6 +90,7 @@ class Routes {
 
         await db.conectarBD() 
         .then( async () => {
+            await emple.save()
             .then( (mensaje:any) => res.send(`El documento se ha introducido correctamente en la base de datos ${mensaje}`))
             .catch( (error:any) => res.send(`Ha habido un error en la subida del documento a ${db._cadenaConexion}: ${error}`))
         })
