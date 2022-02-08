@@ -99,10 +99,10 @@ class Routes {
         const { id } = req.params
         await db.conectarBD()
         .then( async ()=> {
-            const query = await Atendidos.findOne({
+            const pac = await Atendidos.findOne({
                 _id: id
         })  
-            res.json(query)
+            res.json(pac)
         })
         .catch((mensaje) => {
             res.send(mensaje)
@@ -111,24 +111,24 @@ class Routes {
     }
     //Buscar un empleado especifico
     private getbusempleado = async(req: Request, res: Response)=>{
-        const { id } = req.params
+        const { apellido } = req.params
         await db.conectarBD()
         .then( async ()=> {
-            const query = await Trabajadores.aggregate([
+            const emp = await Trabajadores.aggregate([
                 {
                     $match: {
-                        _id: id
-                    }
+                        "_apellido": apellido
+                    },
                 },{
                     $lookup: {
-                        from: 'pacientes',
-                        localField: '_apellido',
-                        foreignField: ' _medico',
-                        as: "pacientes"
-                    }
+                    from: 'pacientes',
+                    localField: '_apellido',
+                    foreignField: '_medico',
+                    as: "pacientes"
+                }
                 }
             ])
-            res.json(query)
+            res.json(emp)
         })
         .catch((mensaje) => {
             res.send(mensaje)
@@ -138,7 +138,7 @@ class Routes {
     //Actualizar o cambiar los datos de un paciente especifico
     private updatepaciente = async (req: Request, res: Response) => {
         const {id} = req.params
-        const {nombre, apellido1, apellido2, dni, telefono, medico, pruebas} = req.body
+        const {nombre, apellido1, apellido2, dni, telefono, medico, tipo, pruebas, test} = req.body
         await db.conectarBD()
         await Atendidos.findOneAndUpdate({
             _id: id
@@ -149,7 +149,9 @@ class Routes {
             _dni: dni,
             _telefono: telefono,
             _medico: medico,
-            _prueba: pruebas
+            _tipo: tipo,
+            _prueba: pruebas,
+            _test: test
         },{
             new:true,
             runValidators:true
@@ -162,7 +164,7 @@ class Routes {
     //Actualizar o cambiar los datos de un empleado especifico
     private updateempleado = async (req: Request, res: Response) => {
         const {id} = req.params
-        const {nombre, apellido, contacto, idiomas, sueldo} = req.body
+        const {nombre, apellido, contacto, sueldo, idiomas} = req.body
         await db.conectarBD()
         await Trabajadores.findOneAndUpdate({
             _id: id
@@ -170,8 +172,8 @@ class Routes {
             _nombre: nombre,
             _apellido: apellido,
             _contacto: contacto,
+            _sueldo: sueldo,
             _idiomas: idiomas,
-            _sueldo: sueldo
         },{
             new:true,
             runValidators:true
@@ -225,7 +227,7 @@ class Routes {
         this._router.get('/verpaciente', this.getPacientes),
         this._router.get('/verempleado', this.getEmpleados),
         this._router.get('/buspaciente/:id', this.getbuspaciente),
-        this._router.get('/buscarempleado/:id', this.getbusempleado),
+        this._router.get('/busempleado/:apellido', this.getbusempleado),
         this._router.put('/actualizarpaciente/:id', this.updatepaciente),
         this._router.put('/actualizarempleado/:id', this.updateempleado),
         this._router.delete('/eliminarpaciente/:id', this.deletepaciente),

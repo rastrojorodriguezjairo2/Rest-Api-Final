@@ -2,8 +2,8 @@ import mongoose from 'mongoose';
 
 class DataBase {
 
-    public _cadenaConexion: string = 'mongodb://localhost/Hospital'
-    public _cadenaConexion2: string = 'mongodb+srv://jairo:1234@cluster0.dynye.mongodb.net/Hospital?retryWrites=true&w=majority'
+    public _cadenaConexion2: string = 'mongodb://localhost/Hospital'
+    public _cadenaConexion: string = 'mongodb+srv://jairo:1234@cluster0.dynye.mongodb.net/Hospital?retryWrites=true&w=majority'
     constructor(){
 
     }
