@@ -18,7 +18,7 @@ class Routes {
     constructor() {
         //Añadir un nuevo paciente
         this.postpacientes = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const { id, nombre, apellido1, apellido2, edad, dni, telefono, medico, dolencia, tipo, prueba, test } = req.body;
+            const { id, nombre, apellido1, apellido2, edad, dni, telefono, medico, urgencia, tipo, prueba, test } = req.body;
             yield database_1.db.conectarBD();
             const dSchema = {
                 _id: id,
@@ -29,7 +29,7 @@ class Routes {
                 _dni: dni,
                 _telefono: telefono,
                 _medico: medico,
-                _dolencia: dolencia,
+                _urgencia: urgencia,
                 _tipo: tipo,
                 _prueba: prueba,
                 _test: test
