@@ -8,8 +8,8 @@
   },
   "scripts": {
     "ts": "tsc -w",
-    "dev": "nodemon ./dist/server.js",
-    "start": "node ./dist/server.js"
+    "dev": "nodemon ./build/server.js",
+    "start": "node ./build/server.js"
   },
   "keywords": [],
   "author": "",
