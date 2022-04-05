@@ -2,6 +2,7 @@ import {Request, Response, Router} from 'express'
 import {Atendidos} from '../model/pacientes'
 import {Trabajadores} from '../model/empleados'
 import {db} from '../database/database'
+import { debuglog } from 'util'
 
 class Routes {
     private _router: Router
@@ -93,6 +94,50 @@ class Routes {
             res.send(mensaje)
         })
         await db.desconectarBD()
+    }
+    //Listar todos los medicos de la BD
+    private getMedicos=async(req:Request, res:Response)=>{
+        await db.conectarBD()
+        .then(async ()=>{
+            const query = await Trabajadores.aggregate([{
+                $match:{
+                    "_idiomas": ""
+                }
+            }])
+        })
+    }
+    //Listar todos los administrativos de la BD
+    private getAdministrativos=async(req:Request, res:Response)=>{
+        await db.conectarBD()
+        .then(async ()=>{
+            const query = await Trabajadores.aggregate([{
+                $match:{
+                    "_especialidad": ""
+                }
+            }])
+        })
+    }
+    //Listar todos los pacientes de urgencias de la BD
+    private getUrgencias=async(req:Request, res:Response)=>{
+        await db.conectarBD()
+        .then(async ()=>{
+            const query = await Trabajadores.aggregate([{
+                $match:{
+                    "_test": ""
+                }
+            }])
+        })
+    }
+    //Listar todos los pacientes covid de la BD
+    private getCovid=async(req:Request, res:Response)=>{
+        await db.conectarBD()
+        .then(async ()=>{
+            const query = await Trabajadores.aggregate([{
+                $match:{
+                    "_prueba": ""
+                }
+            }])
+        })
     }
     //Buscar un paciente especifico
     private getbuspaciente = async (req:Request, res: Response) => {
@@ -225,13 +270,17 @@ class Routes {
         this._router.post('/newpaciente', this.postpacientes),
         this._router.post('/newempleado', this.postempleados),
         this._router.get('/verpaciente', this.getPacientes),
+        this._router.get('/verpaciente', this.getUrgencias),
+        this._router.get('/verpaciente', this.getCovid),
         this._router.get('/verempleado', this.getEmpleados),
+        this._router.get('/vermedicos/:id', this.getMedicos),
+        this._router.get('/vermedicos/:id', this.getAdministrativos),
         this._router.get('/buspaciente/:id', this.getbuspaciente),
         this._router.get('/busempleado/:apellido', this.getbusempleado),
         this._router.put('/actualizarpaciente/:id', this.updatepaciente),
         this._router.put('/actualizarempleado/:id', this.updateempleado),
         this._router.delete('/eliminarpaciente/:id', this.deletepaciente),
-        this._router.delete('/eliminarempleado/:id', this.deleteempleado)
+        this._router.delete('/eliminarempleado/:id', this.deleteempleado)        
     }
 }
 const obj = new Routes()
