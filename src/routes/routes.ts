@@ -99,18 +99,9 @@ class Routes {
     private getMedicos=async(req:Request, res:Response)=>{
         await db.conectarBD()
         .then(async ()=>{
-            const query = await Trabajadores.aggregate([{
-                $match:{
-                    "_idiomas": ""
-                },
-                $lookup: {
-                    from: 'pacientes',
-                    localField: '_idiomas',
-                    foreignField: '_medico',
-                    as: "pacientes"
-                }
-            }
-        ])
+            const query = await Trabajadores.find({
+                "_idiomas": ""
+            })
          res.json(query)   
         })
         .catch((mensaje)=>{
