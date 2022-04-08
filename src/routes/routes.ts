@@ -102,6 +102,12 @@ class Routes {
             const query = await Trabajadores.aggregate([{
                 $match:{
                     "_idiomas": ""
+                },
+                $lookup: {
+                    from: 'pacientes',
+                    localField: '_apellido',
+                    foreignField: '_medico',
+                    as: "pacientes"
                 }
             }
         ])
