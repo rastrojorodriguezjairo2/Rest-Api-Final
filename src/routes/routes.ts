@@ -103,8 +103,12 @@ class Routes {
                 $match:{
                     "_idiomas": ""
                 }
-            }])
-            res.json(query)
+            }
+        ])
+         res.json(query)   
+        })
+        .catch((mensaje)=>{
+            res.send(mensaje)
         })
         await db.desconectarBD()
     }
@@ -116,8 +120,12 @@ class Routes {
                 $match:{
                     "_especialidad": ""
                 }
-            }])
-            res.json(query)
+            }
+        ])
+        res.json(query)
+        })
+        .catch((mensaje)=>{
+            res.send(mensaje)
         })
         await db.desconectarBD()
     }
@@ -129,8 +137,12 @@ class Routes {
                 $match:{
                     "_test": ""
                 }
-            }])
-            res.json(query)
+            }
+        ])
+        res.json(query)
+        })
+        .catch((mensaje)=>{
+            res.send(mensaje)
         })
         await db.desconectarBD()
     }
@@ -142,8 +154,12 @@ class Routes {
                 $match:{
                     "_prueba": ""
                 }
-            }])
-            res.json(query)
+            }
+        ])
+        res.json(query)
+        })
+        .catch((mensaje)=>{
+            res.send(mensaje)
         })
         await db.desconectarBD()
     }
