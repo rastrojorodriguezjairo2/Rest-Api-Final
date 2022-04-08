@@ -104,7 +104,9 @@ class Routes {
                     "_idiomas": ""
                 }
             }])
+            res.json(query)
         })
+        await db.desconectarBD()
     }
     //Listar todos los administrativos de la BD
     private getAdministrativos=async(req:Request, res:Response)=>{
@@ -115,7 +117,9 @@ class Routes {
                     "_especialidad": ""
                 }
             }])
+            res.json(query)
         })
+        await db.desconectarBD()
     }
     //Listar todos los pacientes de urgencias de la BD
     private getUrgencias=async(req:Request, res:Response)=>{
@@ -126,7 +130,9 @@ class Routes {
                     "_test": ""
                 }
             }])
+            res.json(query)
         })
+        await db.desconectarBD()
     }
     //Listar todos los pacientes covid de la BD
     private getCovid=async(req:Request, res:Response)=>{
@@ -137,7 +143,9 @@ class Routes {
                     "_prueba": ""
                 }
             }])
+            res.json(query)
         })
+        await db.desconectarBD()
     }
     //Buscar un paciente especifico
     private getbuspaciente = async (req:Request, res: Response) => {
