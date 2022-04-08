@@ -100,7 +100,7 @@ class Routes {
         await db.conectarBD()
         .then(async ()=>{
             const query = await Trabajadores.find({
-                "_idiomas": ""
+                "_idiomas": ' '
             })
          res.json(query)   
         })
