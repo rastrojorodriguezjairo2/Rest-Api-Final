@@ -32,8 +32,7 @@ const pacienteSchema = new Schema({
         type: String
       },
     _tipo: {
-      type: String,
-      default: 'Urgencia'
+      type: String
     },
       _prueba: {
         type: Array,
@@ -55,6 +54,7 @@ export type pacicovid = {
     _telefono: number | null,
     _medico: number | null,
     _urgencia: string | null,
+    _tipo: string | null,
     _test: string | null,
 }
 
@@ -68,6 +68,7 @@ export type paciurgencia = {
   _telefono: number | null,
   _medico: number | null,
   _urgencia: string | null,
+  _tipo: string | null,
   _pruebas: String [] | null,
 }
 export const Atendidos = model('pacientes', pacienteSchema)

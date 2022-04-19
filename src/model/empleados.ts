@@ -18,6 +18,9 @@ const empleSchema = new Schema({
     _sueldo: {
         type: Number
     },
+    _tipo: {
+        type: String
+    },
     _especialidad: {
       type: String,
     },
@@ -32,15 +35,17 @@ export type empmedico = {
     _nombre: string | null,
     _apellido: string | null,
     _contacto: number | null,
-    _especialidad: string | null,
-    _sueldo: number | null
+    _sueldo: number | null,
+    _tipo: string | null,
+    _especialidad: string | null
 }
 export type empadmin = {
     _id: number | null
     _nombre: string | null,
     _apellido: string | null,
     _contacto: number | null,
-    _idioma: string [] | null,
-    _sueldo: number | null
+    _sueldo: number | null,
+    _tipo: string | null,
+    _idioma: string [] | null
 }
 export const Trabajadores = model('empleados', empleSchema)

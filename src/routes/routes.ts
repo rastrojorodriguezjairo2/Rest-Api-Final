@@ -100,7 +100,7 @@ class Routes {
         await db.conectarBD()
         .then(async ()=>{
             const query = await Trabajadores.find({
-                _idiomas: 0
+                "_tipo": 'medico'
             })
          res.json(query)   
         })
@@ -115,7 +115,7 @@ class Routes {
         .then(async ()=>{
             const query = await Trabajadores.aggregate([{
                 $match:{
-                    "_especialidad": ""
+                    "_tipo": 'administrativo'
                 }
             }
         ])
@@ -132,7 +132,7 @@ class Routes {
         .then(async ()=>{
             const query = await Trabajadores.aggregate([{
                 $match:{
-                    "_test": ""
+                    "_tipo": 'urgencias'
                 }
             }
         ])
@@ -149,7 +149,7 @@ class Routes {
         .then(async ()=>{
             const query = await Trabajadores.aggregate([{
                 $match:{
-                    "_prueba": ""
+                    "_tipo": 'covid'
                 }
             }
         ])
