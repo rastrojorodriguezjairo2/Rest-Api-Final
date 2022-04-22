@@ -39,17 +39,17 @@ class Routes {
     }
     //Añadir un nuevo Empleado
     private postempleados = async (req: Request, res: Response) => {
-        const { id, nombre, apellido, contacto, puesto, especialidad, idiomas, sueldo } = req.body
+        const { id, nombre, apellido, contacto, sueldo, tipo, especialidad, idiomas } = req.body
         await db.conectarBD()
         const dSchema={
             _id: id,
             _nombre: nombre,
             _apellido: apellido,
             _contacto: contacto,
-            _puesto: puesto,
+            _sueldo: sueldo,
+            _tipo: tipo,
             _especialidad: especialidad,
-            _idiomas: idiomas,
-            _sueldo: sueldo
+            _idiomas: idiomas
         }
         const oSchema = new Trabajadores(dSchema)
         await oSchema.save()
@@ -240,7 +240,7 @@ class Routes {
             _contacto: contacto,
             _sueldo: sueldo,
             _tipo: tipo,
-            _idiomas: idiomas,
+            _idiomas: idiomas
         },{
             new:true,
             runValidators:true
