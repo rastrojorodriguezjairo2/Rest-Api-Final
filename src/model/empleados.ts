@@ -13,16 +13,16 @@ const empleSchema = new Schema({
       },
     _contacto: {
         type: Number,
-        unique: true,
+        unique: true
       },
     _sueldo: {
         type: Number
     },
     _tipo: {
-        type: String
+      type: String
     },
     _especialidad: {
-      type: String,
+      type: String
     },
     _idiomas: {
         type: Array,

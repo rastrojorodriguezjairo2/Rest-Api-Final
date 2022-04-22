@@ -38,7 +38,7 @@ class Routes {
         await db.desconectarBD()
     }
     //Añadir un nuevo Empleado
-    private postempleados = async (req: Request, res: Response) => {
+    private postempleado = async (req: Request, res: Response) => {
         const { id, nombre, apellido, contacto, sueldo, tipo, especialidad, idiomas } = req.body
         await db.conectarBD()
         const dSchema={
@@ -290,7 +290,7 @@ class Routes {
     }
     misRutas(){
         this._router.post('/newpaciente', this.postpacientes),
-        this._router.post('/newempleado', this.postempleados),
+        this._router.post('/newempleado', this.postempleado),
         this._router.get('/verpaciente', this.getPacientes),
         this._router.get('/verurgencias', this.getUrgencias),
         this._router.get('/vercovid', this.getCovid),
