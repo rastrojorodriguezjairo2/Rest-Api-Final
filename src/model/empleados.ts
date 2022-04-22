@@ -30,6 +30,17 @@ const empleSchema = new Schema({
     }
 })
 
+export type empleado = {
+  _id: number | null
+  _nombre: string | null,
+  _apellido: string | null,
+  _contacto: number | null,
+  _sueldo: number | null,
+  _tipo: string | null,
+  _especialidad: string | null,
+  _idioma: string [] | null
+}
+
 export type empmedico = {
     _id: number | null
     _nombre: string | null,
