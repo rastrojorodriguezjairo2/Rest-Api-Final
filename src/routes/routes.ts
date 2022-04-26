@@ -47,7 +47,7 @@ class Routes {
             _apellido: apellido,
             _contacto: contacto,
             _sueldo: sueldo,
-            _tipo: tipo,
+            _tipo: tipo, 
             _especialidad: especialidad,
             _idiomas: idiomas
         }

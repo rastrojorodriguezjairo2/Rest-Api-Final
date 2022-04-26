@@ -19,7 +19,8 @@ const empleSchema = new Schema({
         type: Number
     },
     _tipo: {
-      type: String
+      type: String,
+      required: true
     },
     _especialidad: {
       type: String
@@ -30,7 +31,7 @@ const empleSchema = new Schema({
     }
 })
 
-export type empleado = {
+export type empgeneral = {
   _id: number | null
   _nombre: string | null,
   _apellido: string | null,
