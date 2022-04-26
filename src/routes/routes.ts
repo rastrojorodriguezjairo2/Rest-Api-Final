@@ -39,7 +39,7 @@ class Routes {
     }
     //Añadir un nuevo Empleado
     private postempleado = async (req: Request, res: Response) => {
-        const { id, nombre, apellido, contacto, sueldo, tipo, especialidad, idiomas } = req.body
+        const { id, nombre, apellido, contacto, sueldo, puesto, especialidad, idiomas} = req.body
         await db.conectarBD()
         const dSchema={
             _id: id,
@@ -47,7 +47,7 @@ class Routes {
             _apellido: apellido,
             _contacto: contacto,
             _sueldo: sueldo,
-            _tipo: tipo, 
+            _puesto: puesto, 
             _especialidad: especialidad,
             _idiomas: idiomas
         }
@@ -100,7 +100,7 @@ class Routes {
         await db.conectarBD()
         .then(async ()=>{
             const query = await Trabajadores.find({
-                "_tipo": 'medico'
+                "_puesto": 'medico'
             })
          res.json(query)   
         })
@@ -115,7 +115,7 @@ class Routes {
         .then(async ()=>{
             const query = await Trabajadores.aggregate([{
                 $match:{
-                    "_tipo": 'administrativo'
+                    "_puesto": 'administrativo'
                 }
             }
         ])
@@ -230,7 +230,7 @@ class Routes {
     //Actualizar o cambiar los datos de un empleado especifico
     private updateempleado = async (req: Request, res: Response) => {
         const {id} = req.params
-        const {nombre, apellido, contacto, sueldo, tipo, idiomas} = req.body
+        const {nombre, apellido, contacto, sueldo, puesto, idiomas} = req.body
         await db.conectarBD()
         await Trabajadores.findOneAndUpdate({
             _id: id
@@ -239,7 +239,7 @@ class Routes {
             _apellido: apellido,
             _contacto: contacto,
             _sueldo: sueldo,
-            _tipo: tipo,
+            _puesto: puesto,
             _idiomas: idiomas
         },{
             new:true,
