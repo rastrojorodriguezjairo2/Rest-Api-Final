@@ -39,8 +39,10 @@ class Routes {
     }
     //Añadir un nuevo Empleado
     private postempleado = async (req: Request, res: Response) => {
+        console.log("HOLA")
         const { id, nombre, apellido, contacto, sueldo, puesto, especialidad, idiomas} = req.body
         await db.conectarBD()
+        console.log(req.body)
         const dSchema={
             _id: id,
             _nombre: nombre,

@@ -41,18 +41,20 @@ class Routes {
             yield database_1.db.desconectarBD();
         });
         //Añadir un nuevo Empleado
-        this.postempleados = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const { id, nombre, apellido, contacto, puesto, especialidad, idiomas, sueldo } = req.body;
+        this.postempleado = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            console.log("HOLA");
+            const { id, nombre, apellido, contacto, sueldo, puesto, especialidad, idiomas } = req.body;
             yield database_1.db.conectarBD();
+            console.log(req.body);
             const dSchema = {
                 _id: id,
                 _nombre: nombre,
                 _apellido: apellido,
                 _contacto: contacto,
+                _sueldo: sueldo,
                 _puesto: puesto,
                 _especialidad: especialidad,
-                _idiomas: idiomas,
-                _sueldo: sueldo
+                _idiomas: idiomas
             };
             const oSchema = new empleados_1.Trabajadores(dSchema);
             yield oSchema.save()
@@ -88,6 +90,71 @@ class Routes {
                             localField: '_apellido',
                             foreignField: '_medico',
                             as: "pacientes"
+                        }
+                    }
+                ]);
+                res.json(query);
+            }))
+                .catch((mensaje) => {
+                res.send(mensaje);
+            });
+            yield database_1.db.desconectarBD();
+        });
+        //Listar todos los medicos de la BD
+        this.getMedicos = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            yield database_1.db.conectarBD()
+                .then(() => __awaiter(this, void 0, void 0, function* () {
+                const query = yield empleados_1.Trabajadores.find({
+                    "_puesto": 'medico'
+                });
+                res.json(query);
+            }))
+                .catch((mensaje) => {
+                res.send(mensaje);
+            });
+            yield database_1.db.desconectarBD();
+        });
+        //Listar todos los administrativos de la BD
+        this.getAdministrativos = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            yield database_1.db.conectarBD()
+                .then(() => __awaiter(this, void 0, void 0, function* () {
+                const query = yield empleados_1.Trabajadores.aggregate([{
+                        $match: {
+                            "_puesto": 'administrativo'
+                        }
+                    }
+                ]);
+                res.json(query);
+            }))
+                .catch((mensaje) => {
+                res.send(mensaje);
+            });
+            yield database_1.db.desconectarBD();
+        });
+        //Listar todos los pacientes de urgencias de la BD
+        this.getUrgencias = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            yield database_1.db.conectarBD()
+                .then(() => __awaiter(this, void 0, void 0, function* () {
+                const query = yield empleados_1.Trabajadores.aggregate([{
+                        $match: {
+                            "_tipo": 'urgencias'
+                        }
+                    }
+                ]);
+                res.json(query);
+            }))
+                .catch((mensaje) => {
+                res.send(mensaje);
+            });
+            yield database_1.db.desconectarBD();
+        });
+        //Listar todos los pacientes covid de la BD
+        this.getCovid = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            yield database_1.db.conectarBD()
+                .then(() => __awaiter(this, void 0, void 0, function* () {
+                const query = yield empleados_1.Trabajadores.aggregate([{
+                        $match: {
+                            "_tipo": 'covid'
                         }
                     }
                 ]);
@@ -167,7 +234,7 @@ class Routes {
         //Actualizar o cambiar los datos de un empleado especifico
         this.updateempleado = (req, res) => __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const { nombre, apellido, contacto, sueldo, idiomas } = req.body;
+            const { nombre, apellido, contacto, sueldo, puesto, idiomas } = req.body;
             yield database_1.db.conectarBD();
             yield empleados_1.Trabajadores.findOneAndUpdate({
                 _id: id
@@ -176,7 +243,8 @@ class Routes {
                 _apellido: apellido,
                 _contacto: contacto,
                 _sueldo: sueldo,
-                _idiomas: idiomas,
+                _puesto: puesto,
+                _idiomas: idiomas
             }, {
                 new: true,
                 runValidators: true
@@ -228,9 +296,13 @@ class Routes {
     }
     misRutas() {
         this._router.post('/newpaciente', this.postpacientes),
-            this._router.post('/newempleado', this.postempleados),
+            this._router.post('/newempleado', this.postempleado),
             this._router.get('/verpaciente', this.getPacientes),
+            this._router.get('/verurgencias', this.getUrgencias),
+            this._router.get('/vercovid', this.getCovid),
             this._router.get('/verempleado', this.getEmpleados),
+            this._router.get('/vermedicos', this.getMedicos),
+            this._router.get('/veradministrativos', this.getAdministrativos),
             this._router.get('/buspaciente/:id', this.getbuspaciente),
             this._router.get('/busempleado/:apellido', this.getbusempleado),
             this._router.put('/actualizarpaciente/:id', this.updatepaciente),

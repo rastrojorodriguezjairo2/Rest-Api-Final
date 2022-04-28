@@ -6,21 +6,25 @@ const empleSchema = new Schema({
       unique: true
     },
     _nombre: {
-        type: String
+        type: String,
+        required: true
       },
     _apellido: {
-        type: String
+        type: String,
+        required: true
       },
     _contacto: {
         type: Number,
         unique: true
       },
     _sueldo: {
-        type: Number
+        type: Number,
+        required: true
     },
     _puesto: {
       type: String,
-      required: true
+      required
+      : true
     },
     _especialidad: {
       type: String
@@ -32,7 +36,7 @@ const empleSchema = new Schema({
 })
 
 export type empgeneral = {
-  _id: number | null
+  _id: number | null,
   _nombre: string | null,
   _apellido: string | null,
   _contacto: number | null,
@@ -43,7 +47,7 @@ export type empgeneral = {
 }
 
 export type empmedico = {
-    _id: number | null
+    _id: number | null,
     _nombre: string | null,
     _apellido: string | null,
     _contacto: number | null,
@@ -52,7 +56,7 @@ export type empmedico = {
     _especialidad: string | null
 }
 export type empadmin = {
-    _id: number | null
+    _id: number | null,
     _nombre: string | null,
     _apellido: string | null,
     _contacto: number | null,

@@ -8,20 +8,27 @@ const empleSchema = new mongoose_1.Schema({
         unique: true
     },
     _nombre: {
-        type: String
+        type: String,
+        required: true
     },
     _apellido: {
-        type: String
+        type: String,
+        required: true
     },
     _contacto: {
         type: Number,
-        unique: true,
+        unique: true
     },
     _sueldo: {
-        type: Number
+        type: Number,
+        required: true
+    },
+    _puesto: {
+        type: String,
+        required: true
     },
     _especialidad: {
-        type: String,
+        type: String
     },
     _idiomas: {
         type: Array,

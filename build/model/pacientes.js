@@ -33,8 +33,7 @@ const pacienteSchema = new mongoose_1.Schema({
         type: String
     },
     _tipo: {
-        type: String,
-        default: 'Urgencia'
+        type: String
     },
     _prueba: {
         type: Array,
