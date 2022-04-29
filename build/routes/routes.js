@@ -234,7 +234,7 @@ class Routes {
         //Actualizar o cambiar los datos de un empleado especifico
         this.updateempleado = (req, res) => __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const { nombre, apellido, contacto, sueldo, puesto, idiomas } = req.body;
+            const { nombre, apellido, contacto, sueldo, puesto, especialidad, idiomas } = req.body;
             yield database_1.db.conectarBD();
             yield empleados_1.Trabajadores.findOneAndUpdate({
                 _id: id
@@ -244,6 +244,7 @@ class Routes {
                 _contacto: contacto,
                 _sueldo: sueldo,
                 _puesto: puesto,
+                _especialidad: especialidad,
                 _idiomas: idiomas
             }, {
                 new: true,

@@ -232,7 +232,7 @@ class Routes {
     //Actualizar o cambiar los datos de un empleado especifico
     private updateempleado = async (req: Request, res: Response) => {
         const {id} = req.params
-        const {nombre, apellido, contacto, sueldo, puesto, idiomas} = req.body
+        const {nombre, apellido, contacto, sueldo, puesto, especialidad, idiomas} = req.body
         await db.conectarBD()
         await Trabajadores.findOneAndUpdate({
             _id: id
@@ -242,6 +242,7 @@ class Routes {
             _contacto: contacto,
             _sueldo: sueldo,
             _puesto: puesto,
+            _especialidad: especialidad,
             _idiomas: idiomas
         },{
             new:true,
