@@ -71,4 +71,5 @@ export type paciurgencia = {
   _tipo: string | null,
   _pruebas: String [] | null,
 }
+//hola que tal estamos
 export const Atendidos = model('pacientes', pacienteSchema)
