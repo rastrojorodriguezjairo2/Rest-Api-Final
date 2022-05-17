@@ -290,7 +290,7 @@ class Routes {
         })
         .catch ((err: any) => res.send('Error: '+ err))
         db.desconectarBD()
-    }.
+    }
     misRutas(){
         this._router.post('/newpaciente', this.postpacientes),
         this._router.post('/newempleado', this.postempleado),
