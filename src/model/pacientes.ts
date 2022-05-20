@@ -43,6 +43,20 @@ const pacienteSchema = new Schema({
       }
 })
 
+export type pacigeneral = {
+  _id: number | null,
+  _nombre: string | null,
+  _apellido1: string | null,
+  _apellido2: string | null,
+  _edad: number | null,
+  _dni: string | null,
+  _telefono: number | null,
+  _medico: number | null,
+  _urgencia: string | null,
+  _tipo: string | null,
+  _pruebas: string | null,
+  _test: string | null
+}
 
 export type pacicovid = {
     _id: number | null,
@@ -71,5 +85,4 @@ export type paciurgencia = {
   _tipo: string | null,
   _pruebas: String [] | null,
 }
-//hola que tal estamos
 export const Atendidos = model('pacientes', pacienteSchema)
