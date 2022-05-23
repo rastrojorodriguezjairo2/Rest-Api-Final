@@ -132,13 +132,10 @@ class Routes {
     private getUrgencias=async(req:Request, res:Response)=>{
         await db.conectarBD()
         .then(async ()=>{
-            const query = await Atendidos.aggregate([{
-                $match:{
-                    "_tipo": 'urgencia'
-                }
-            }
-        ])
-        res.json(query)
+            const query = await Atendidos.find({
+                "_tipo": 'urgencia'
+            })
+         res.json(query)   
         })
         .catch((mensaje)=>{
             res.send(mensaje)
