@@ -83,6 +83,6 @@ export type paciurgencia = {
   _medico: number | null,
   _urgencia: string | null,
   _tipo: string | null,
-  _pruebas: String [] | null,
+  _pruebas: string [] | null,
 }
 export const Atendidos = model('pacientes', pacienteSchema)
