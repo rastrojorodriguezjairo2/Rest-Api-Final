@@ -101,10 +101,10 @@ class Routes {
     private getMedicos=async(req:Request, res:Response)=>{
         await db.conectarBD()
         .then(async ()=>{
-            const query = await Trabajadores.find({
+            const medicos = await Trabajadores.find({
                 "_puesto": 'medico'
             })
-         res.json(query)   
+         res.json(medicos)   
         })
         .catch((mensaje)=>{
             res.send(mensaje)
@@ -115,13 +115,13 @@ class Routes {
     private getAdministrativos=async(req:Request, res:Response)=>{
         await db.conectarBD()
         .then(async ()=>{
-            const query = await Trabajadores.aggregate([{
+            const admin = await Trabajadores.aggregate([{
                 $match:{
                     "_puesto": 'administrativo'
                 }
             }
         ])
-        res.json(query)
+        res.json(admin)
         })
         .catch((mensaje)=>{
             res.send(mensaje)
@@ -132,10 +132,10 @@ class Routes {
     private getUrgencias=async(req:Request, res:Response)=>{
         await db.conectarBD()
         .then(async ()=>{
-            const query = await Atendidos.find({
+            const urgen = await Atendidos.find({
                 "_tipo": 'urgencia'
             })
-         res.json(query)   
+         res.json(urgen)   
         })
         .catch((mensaje)=>{
             res.send(mensaje)
@@ -146,13 +146,13 @@ class Routes {
     private getCovid=async(req:Request, res:Response)=>{
         await db.conectarBD()
         .then(async ()=>{
-            const query = await Atendidos.aggregate([{
+            const covi = await Atendidos.aggregate([{
                 $match:{
                     "_tipo": 'covid'
                 }
             }
         ])
-        res.json(query)
+        res.json(covi)
         })
         .catch((mensaje)=>{
             res.send(mensaje)

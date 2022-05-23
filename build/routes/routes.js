@@ -104,10 +104,10 @@ class Routes {
         this.getMedicos = (req, res) => __awaiter(this, void 0, void 0, function* () {
             yield database_1.db.conectarBD()
                 .then(() => __awaiter(this, void 0, void 0, function* () {
-                const query = yield empleados_1.Trabajadores.find({
+                const medicos = yield empleados_1.Trabajadores.find({
                     "_puesto": 'medico'
                 });
-                res.json(query);
+                res.json(medicos);
             }))
                 .catch((mensaje) => {
                 res.send(mensaje);
@@ -118,13 +118,13 @@ class Routes {
         this.getAdministrativos = (req, res) => __awaiter(this, void 0, void 0, function* () {
             yield database_1.db.conectarBD()
                 .then(() => __awaiter(this, void 0, void 0, function* () {
-                const query = yield empleados_1.Trabajadores.aggregate([{
+                const admin = yield empleados_1.Trabajadores.aggregate([{
                         $match: {
                             "_puesto": 'administrativo'
                         }
                     }
                 ]);
-                res.json(query);
+                res.json(admin);
             }))
                 .catch((mensaje) => {
                 res.send(mensaje);
@@ -135,13 +135,10 @@ class Routes {
         this.getUrgencias = (req, res) => __awaiter(this, void 0, void 0, function* () {
             yield database_1.db.conectarBD()
                 .then(() => __awaiter(this, void 0, void 0, function* () {
-                const query = yield empleados_1.Trabajadores.aggregate([{
-                        $match: {
-                            "_tipo": 'urgencias'
-                        }
-                    }
-                ]);
-                res.json(query);
+                const urgen = yield pacientes_1.Atendidos.find({
+                    "_tipo": 'urgencia'
+                });
+                res.json(urgen);
             }))
                 .catch((mensaje) => {
                 res.send(mensaje);
@@ -152,13 +149,13 @@ class Routes {
         this.getCovid = (req, res) => __awaiter(this, void 0, void 0, function* () {
             yield database_1.db.conectarBD()
                 .then(() => __awaiter(this, void 0, void 0, function* () {
-                const query = yield empleados_1.Trabajadores.aggregate([{
+                const covi = yield pacientes_1.Atendidos.aggregate([{
                         $match: {
                             "_tipo": 'covid'
                         }
                     }
                 ]);
-                res.json(query);
+                res.json(covi);
             }))
                 .catch((mensaje) => {
                 res.send(mensaje);
