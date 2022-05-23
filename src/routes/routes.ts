@@ -132,12 +132,9 @@ class Routes {
     private getUrgencias=async(req:Request, res:Response)=>{
         await db.conectarBD()
         .then(async ()=>{
-            const query = await Atendidos.aggregate([{
-                $match:{
+            const query = await Atendidos.find({
                     "_tipo": 'urgencia'
-                }
-            }
-        ])
+            })
         res.json(query)
         })
         .catch((mensaje)=>{
@@ -149,12 +146,9 @@ class Routes {
     private getCovid=async(req:Request, res:Response)=>{
         await db.conectarBD()
         .then(async ()=>{
-            const query = await Atendidos.aggregate([{
-                $match:{
-                    "_tipo": 'covid'
-                }
-            }
-        ])
+            const query = await Atendidos.find({
+                    "_tipo": 'urgencia'
+            })
         res.json(query)
         })
         .catch((mensaje)=>{
