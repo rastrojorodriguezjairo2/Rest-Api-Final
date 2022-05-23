@@ -134,7 +134,7 @@ class Routes {
         .then(async ()=>{
             const query = await Atendidos.aggregate([{
                 $match:{
-                    "_tipo": 'urgencias'
+                    "_tipo": 'urgencia'
                 }
             }
         ])
