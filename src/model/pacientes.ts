@@ -34,10 +34,11 @@ const pacienteSchema = new Schema({
     _tipo: {
       type: String
     },
-      _prueba: {
+      _pruebas: {
         type: Array,
         default: 'String'
       },
+      
       _test: {
         type: String,
       }

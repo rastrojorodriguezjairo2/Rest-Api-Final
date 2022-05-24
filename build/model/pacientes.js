@@ -35,7 +35,7 @@ const pacienteSchema = new mongoose_1.Schema({
     _tipo: {
         type: String
     },
-    _prueba: {
+    _pruebas: {
         type: Array,
         default: 'String'
     },
