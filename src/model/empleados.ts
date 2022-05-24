@@ -1,5 +1,5 @@
 import {Schema, model } from 'mongoose'
-//SchemaEmpleados
+
 const empleSchema = new Schema({
     _id:{
       type: Number,

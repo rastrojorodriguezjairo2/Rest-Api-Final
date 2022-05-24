@@ -15,7 +15,7 @@ class Routes {
     }
     //Añadir un nuevo paciente
     private postpacientes = async (req: Request, res: Response) => {
-        const { id, nombre, apellido1, apellido2, edad, dni, telefono, medico, urgencia, tipo, prueba, test} = req.body
+        const { id, nombre, apellido1, apellido2, edad, dni, telefono, medico, urgencia, tipo, pruebas, test} = req.body
         await db.conectarBD()
         const dSchema={
             _id: id,
@@ -28,7 +28,7 @@ class Routes {
             _medico: medico,
             _urgencia: urgencia,
             _tipo: tipo,
-            _prueba: prueba,
+            _pruebas: pruebas,
             _test: test
         }
         const oSchema = new Atendidos(dSchema)
@@ -215,7 +215,7 @@ class Routes {
             _telefono: telefono,
             _medico: medico,
             _tipo: tipo,
-            _prueba: pruebas,
+            _pruebas: pruebas,
             _test: test
         },{
             new:true,

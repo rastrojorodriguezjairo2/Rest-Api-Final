@@ -1,5 +1,5 @@
 import {Schema, model } from 'mongoose'
-//Schema Pacientes
+
 const pacienteSchema = new Schema({
     _id: {
       type: Number,
