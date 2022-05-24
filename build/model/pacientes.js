@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Atendidos = void 0;
 const mongoose_1 = require("mongoose");
+//Schema Pacientes
 const pacienteSchema = new mongoose_1.Schema({
     _id: {
         type: Number,

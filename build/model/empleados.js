@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Trabajadores = void 0;
 const mongoose_1 = require("mongoose");
+//SchemaEmpleados
 const empleSchema = new mongoose_1.Schema({
     _id: {
         type: Number,
