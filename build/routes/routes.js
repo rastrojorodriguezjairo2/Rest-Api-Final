@@ -108,6 +108,7 @@ class Routes {
                         $match: {
                             "_puesto": 'medico'
                         },
+                    }, {
                         $lookup: {
                             from: 'pacientes',
                             localField: '_apellido',

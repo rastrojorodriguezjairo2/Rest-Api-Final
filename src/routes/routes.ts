@@ -102,15 +102,17 @@ class Routes {
         await db.conectarBD()
         .then(async ()=>{
             const medicos = await Trabajadores.aggregate([{
-                $match:{
+                
+                $match: {
                     "_puesto": 'medico'
                 },
+            },{
                 $lookup: {
-                    from: 'pacientes',
-                    localField: '_apellido',
-                    foreignField: '_medico',
-                    as: "pacientes"
-                }
+                from: 'pacientes',
+                localField: '_apellido',
+                foreignField: '_medico',
+                as: "pacientes"
+            }
             }
         ])
         res.json(medicos)
