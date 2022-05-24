@@ -101,10 +101,19 @@ class Routes {
     private getMedicos=async(req:Request, res:Response)=>{
         await db.conectarBD()
         .then(async ()=>{
-            const medicos = await Trabajadores.find({
-                "_puesto": 'medico'
-            })
-         res.json(medicos)   
+            const medicos = await Trabajadores.aggregate([{
+                $match:{
+                    "_puesto": 'medico'
+                },
+                $lookup: {
+                    from: 'pacientes',
+                    localField: '_apellido',
+                    foreignField: '_medico',
+                    as: "pacientes"
+                }
+            }
+        ])
+        res.json(medicos)
         })
         .catch((mensaje)=>{
             res.send(mensaje)
@@ -134,7 +143,8 @@ class Routes {
         .then(async ()=>{
             const urgen = await Atendidos.find({
                 "_tipo": 'urgencia'
-            })
+            }
+            )
          res.json(urgen)   
         })
         .catch((mensaje)=>{

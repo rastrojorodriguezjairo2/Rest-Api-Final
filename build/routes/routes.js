@@ -104,9 +104,18 @@ class Routes {
         this.getMedicos = (req, res) => __awaiter(this, void 0, void 0, function* () {
             yield database_1.db.conectarBD()
                 .then(() => __awaiter(this, void 0, void 0, function* () {
-                const medicos = yield empleados_1.Trabajadores.find({
-                    "_puesto": 'medico'
-                });
+                const medicos = yield empleados_1.Trabajadores.aggregate([{
+                        $match: {
+                            "_puesto": 'medico'
+                        },
+                        $lookup: {
+                            from: 'pacientes',
+                            localField: '_apellido',
+                            foreignField: '_medico',
+                            as: "pacientes"
+                        }
+                    }
+                ]);
                 res.json(medicos);
             }))
                 .catch((mensaje) => {
