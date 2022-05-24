@@ -55,7 +55,7 @@ export type pacigeneral = {
   _medico: number | null,
   _urgencia: string | null,
   _tipo: string | null,
-  _pruebas: string | null,
+  _pruebas: string [] | null,
   _test: string | null
 }
 
