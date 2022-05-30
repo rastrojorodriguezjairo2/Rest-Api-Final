@@ -1,4 +1,5 @@
 import {Request, Response, Router} from 'express'
+import { Usuarios } from '../model/usuarios'
 import {Atendidos} from '../model/pacientes'
 import {Trabajadores} from '../model/empleados'
 import {db} from '../database/database'
@@ -300,12 +301,44 @@ class Routes {
         .catch ((err: any) => res.send('Error: '+ err))
         db.desconectarBD()
     }
+
+    private comprobarusuario = async(req: Request, res: Response)=> {
+        await db.conectarBD()
+        .then(async () => {
+            const query = await Usuarios.find(
+                {}
+            )
+            res.json(query)
+        })
+        .catch((mensaje)=>{
+
+        })
+        await db.desconectarBD()
+    }
+
+    private newusuario = async(req: Request, res: Response) => {
+        const {_usuario, _password} = req.body
+        await db.conectarBD()
+        const dSchema ={
+            _usuario: _usuario,
+            _password: _password
+        }
+        const useSchema =new Usuarios(dSchema)
+        console.log(useSchema)
+        await useSchema.save()
+        .then ((doc: any) => res.send(doc))
+        .catch((err: any)=> res.send('Error: '+ err))
+        await db.desconectarBD()
+    }
+
     misRutas(){
         this._router.post('/newpaciente', this.postpacientes),
         this._router.post('/newempleado', this.postempleado),
         this._router.get('/verpaciente', this.getPacientes),
         this._router.get('/verurgencias', this.getUrgencias),
         this._router.get('/vercovid', this.getCovid),
+        this._router.post('/newuser', this.newusuario),
+        this._router.get('/comprobar', this.comprobarusuario),
         this._router.get('/verempleado', this.getEmpleados),
         this._router.get('/vermedicos', this.getMedicos),
         this._router.get('/veradministrativos', this.getAdministrativos),
