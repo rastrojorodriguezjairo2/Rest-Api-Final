@@ -11,7 +11,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.routes = void 0;
 const express_1 = require("express");
-const usuarios_1 = require("../model/usuarios");
 const pacientes_1 = require("../model/pacientes");
 const empleados_1 = require("../model/empleados");
 const database_1 = require("../database/database");
@@ -298,30 +297,6 @@ class Routes {
                 .catch((err) => res.send('Error: ' + err));
             database_1.db.desconectarBD();
         });
-        this.comprobarusuario = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            yield database_1.db.conectarBD()
-                .then(() => __awaiter(this, void 0, void 0, function* () {
-                const query = yield usuarios_1.Usuarios.find({});
-                res.json(query);
-            }))
-                .catch((mensaje) => {
-            });
-            yield database_1.db.desconectarBD();
-        });
-        this.newusuario = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const { _usuario, _password } = req.body;
-            yield database_1.db.conectarBD();
-            const dSchema = {
-                _usuario: _usuario,
-                _password: _password
-            };
-            const useSchema = new usuarios_1.Usuarios(dSchema);
-            console.log(useSchema);
-            yield useSchema.save()
-                .then((doc) => res.send(doc))
-                .catch((err) => res.send('Error: ' + err));
-            yield database_1.db.desconectarBD();
-        });
         this._router = (0, express_1.Router)();
     }
     get router() {
@@ -333,8 +308,6 @@ class Routes {
             this._router.get('/verpaciente', this.getPacientes),
             this._router.get('/verurgencias', this.getUrgencias),
             this._router.get('/vercovid', this.getCovid),
-            this._router.post('/newuser', this.newusuario),
-            this._router.get('/comprobar', this.comprobarusuario),
             this._router.get('/verempleado', this.getEmpleados),
             this._router.get('/vermedicos', this.getMedicos),
             this._router.get('/veradministrativos', this.getAdministrativos),
